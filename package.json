@@ -2,6 +2,10 @@
   "name": "fmdb-v2",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "16.14.0"
+  },
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next",
@@ -19,5 +23,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "sqlite3": "^4.2.0"
-  }
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }
