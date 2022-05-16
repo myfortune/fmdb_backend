@@ -1,0 +1,12 @@
+{
+  "port": 3030,
+  "baseUrl": "http://127.0.0.1",
+  "env": "localhost:3000",
+  "db_dir_local_mac": "/private/var/lib/sqlite3/",
+  "db_dir_local_windows": "C:\\cygwin64\\var\\lib\\sqlite3\\",
+  "db_executable": "fm_database",
+  "platform_windows": "win32",
+  "platform_mac": "darwin"
+
+
+}
