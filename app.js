@@ -18,7 +18,7 @@ let server = require('http').createServer(app);
 //middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public/images')));
+// app.use(express.static(path.join(__dirname, 'public/images')));
 
 //routing - examples
 let indexRouter = require('./routes/index');
