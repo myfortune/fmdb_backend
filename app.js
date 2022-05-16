@@ -1,7 +1,8 @@
+import fs from "fs";
+const fs = require("fs")
 
 const CONFIG = require("./config.json");
 const DEFAULT_PORT = 3030;
-
 //modules
 
 let express = require('express');
