@@ -1,4 +1,3 @@
-
 const CONFIG = require("./config.json");
 const DEFAULT_PORT = 3030;
 //modules
@@ -55,7 +54,8 @@ app.use('/tierList', tierListRouter);
 let port = process.env.PORT || CONFIG.port || DEFAULT_PORT;
 server.listen(port, function(){
     console.log('listening on port ' + port);
-    console.log(process.env.DATABASE_URL)
+
+    console.log(process.env.NODE_ENV)
     console.log(app.get('env'))
 });
 
