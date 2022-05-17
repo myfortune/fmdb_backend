@@ -51,11 +51,12 @@ app.use('/tierList', tierListRouter);
 
 
 
-
 // start the server with the port
 let port = process.env.PORT || CONFIG.port || DEFAULT_PORT;
 server.listen(port, function(){
     console.log('listening on port ' + port);
+    console.log(process.env.DATABASE_URL)
+    console.log(app.get('env'))
 });
 
 module.exports = app;

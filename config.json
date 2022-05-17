@@ -6,7 +6,12 @@
   "db_dir_local_windows": "C:\\cygwin64\\var\\lib\\sqlite3\\",
   "db_executable": "fm_database",
   "platform_windows": "win32",
-  "platform_mac": "darwin"
-
-
+  "platform_mac": "darwin",
+  "db": {
+    "host": "localhost",
+    "port": "5432",
+    "user": "postgres",
+    "password": "30191030",
+    "database": "fmdb_base_dump"
+  }
 }

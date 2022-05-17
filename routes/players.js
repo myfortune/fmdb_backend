@@ -3,22 +3,35 @@ var router = express.Router();
 const PlayerRepository = require("./playerDataRepository.js");
 const PlayersDB = require("../db/playersDB");
 
+const psql = require("../db/psql")
 
 const db = new PlayersDB();
 
 
-
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
 
 
-    let repo = new PlayerRepository(db);
-    let all_data = repo.getAllPlayerCards().then(resp =>{
-        let arr = resp;
-        // arr = arr.slice(1, 30);
+    try {
+        res.json(await psql.query( `SELECT * 
+            FROM all_combined_base
+            WHERE program != 'BASEITEM'`));
+    } catch (err) {
+        console.error(`Error while getting quotes `, err.message);
+        next(err);
+    }
 
-        res.send( arr);
-    })
+
+    // console.log(rows);
+    // res.status(200).send(rows);
+    //
+    // let repo = new PlayerRepository(db);
+    // let all_data = repo.getAllPlayerCards().then(resp =>{
+    //     let arr = resp;
+    //     // arr = arr.slice(1, 30);
+    //zz
+    //     res.send( arr);
+    // })
 });
 
 router.get('/:cardId', function(req, res, next) {
