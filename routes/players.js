@@ -12,9 +12,13 @@ const PlayersDB = require("../db/playersDB");
 
 const psql = require("../db/psql")
 const connectionString = process.env.DATABASE_URL;
+const sslOpt = {
+    rejectUnauthorized: false
+}
 
-
-const pool = psql.init_pool( process.env.DATABASE_URL)
+const pool = express().get('env') === "development" ?
+    psql.init_pool( process.env.DATABASE_URL) :
+    psql.init_pool( process.env.DATABASE_URL, sslOpt) ;
 
 
 const db = new PlayersDB();
