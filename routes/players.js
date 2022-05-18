@@ -1,6 +1,10 @@
-require('dotenv').config()
+
 
 var express = require('express');
+if(express().get('env')==="development"){
+    require('dotenv').config()
+
+}
 var router = express.Router();
 const PlayerRepository = require("./playerDataRepository.js");
 const PlayersDB = require("../db/playersDB");
