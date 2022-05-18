@@ -9,7 +9,12 @@ const database = process.env.PG_DATABASE;
 
 
 function init_pool(connectionString){
-    return new Pool({connectionString})
+    return new Pool({
+
+        connectionString: connectionString,
+        ssl: {
+            rejectUnauthorized: false
+        }})
 }
 
 async function query(pool, query, params) {
