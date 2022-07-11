@@ -1,3 +1,8 @@
+//TODO:
+// - Consider migrating database to AWS
+// - Images must use the new addons for images
+// - refactor and clean up codes
+
 const CONFIG = require("./config.json");
 const DEFAULT_PORT = 3030;
 //modules
@@ -10,7 +15,6 @@ const bodyParser = require('body-parser');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-const sqlite3 = require('sqlite3').verbose();
 let server = require('http').createServer(app);
 
 
@@ -19,44 +23,39 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // app.use(express.static(path.join(__dirname, 'public/images')));
 
-//routing - examples
+//router for pages
 let indexRouter = require('./routes/index');
 let playersRouter = require('./routes/players');
+let mainRouter = require('./routes/main');
 let tierListRouter = require("./routes/tierList")
-let teamsRouter = require('./routes/teams');
-let leaguesRouter = require('./routes/leagues');
+let testRouter = require("./routes/testAPI")
 
-//routing - actual
-let playerScore = require('./routes/playerDataRepository');
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
 });
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//direct these path to the corresponding router
 app.use('/', indexRouter);
+app.use('/maincontent', mainRouter)
 app.use('/players', playersRouter);
 app.use('/tierList', tierListRouter);
-
-
-// app.use('/playerScore', playerScore);
-// app.use('/teams', teamsRouter);
-// app.use('/leagues', leaguesRouter);
-
-
+app.use('/testAPI', testRouter);
 
 // start the server with the port
 let port = process.env.PORT || CONFIG.port || DEFAULT_PORT;
 server.listen(port, function(){
-    console.log('listening on port ' + port);
-
-    console.log(process.env.NODE_ENV)
-    console.log(app.get('env'))
+    console.log(process.env.DATABASE_URL)
+    console.log(`Listening on port ${port}`)
 });
 
 module.exports = app;

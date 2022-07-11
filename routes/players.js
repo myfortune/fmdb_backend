@@ -1,70 +1,48 @@
-
-
-var express = require('express');
-if(express().get('env')==="development"){
+let express = require('express');
+if (express().get('env') === "development") {
     require('dotenv').config()
-
 }
-var router = express.Router();
-const PlayerRepository = require("./playerDataRepository.js");
-const PlayersDB = require("../db/playersDB");
+let router = express.Router();
+const {PSQL_REPOSITORY} = require("../db/psql");
 
 
-const psql = require("../db/psql")
-const connectionString = process.env.DATABASE_URL;
-const sslOpt = {
-    rejectUnauthorized: false
-}
-
-const pool = express().get('env') === "development" ?
-    psql.init_pool( process.env.DATABASE_URL) :
-    psql.init_pool( process.env.DATABASE_URL, sslOpt) ;
-
-
-const db = new PlayersDB();
+//
+// const psql = require("../db/psql")
+// const sslOpt = {
+//     rejectUnauthorized: false
+// }
+//
+//
+// const pool = express().get('env') === "development" ?
+//     psql.init_pool(process.env.DATABASE_URL) :
+//     psql.init_pool(process.env.DATABASE_URL, sslOpt);
 
 
 /* GET users listing. */
-router.get('/', async function(req, res, next) {
+router.get('/', async function (req, res, next) {
     try {
-        res.json(await psql.query(pool , `SELECT * 
-            FROM all_combined_base
-            WHERE program != 'BASEITEM'`));
+        res.json(await new PSQL_REPOSITORY().getAllPlayers());
+    } catch (err) {
+        console.error(`Error while getting quotes `, err.message);
+        next(err);
+    }
+
+});
+
+router.get('/:cardId', async function (req, res, next) {
+    try {
+
+        let cardId = req.params.cardId;
+        let cardObj = await new PSQL_REPOSITORY().getPlayerByCardId(cardId);
+        res.json(cardObj[0])
+
     } catch (err) {
         console.error(`Error while getting quotes `, err.message);
         next(err);
     }
 
 
-
-    // console.log(rows);
-    // res.status(200).send(rows);
-    //
-    // let repo = new PlayerRepository(db);
-    // let all_data = repo.getAllPlayerCards().then(resp =>{
-    //     let arr = resp;
-    //     // arr = arr.slice(1, 30);
-    //zz
-    //     res.send( arr);
-    // })
 });
 
-router.get('/:cardId', function(req, res, next) {
-
-    let cardId = req.params.cardId;
-    console.log(cardId)
-    let repo = new PlayerRepository(db);
-    let all_data = repo.getPlayerCard(cardId).then(resp => {
-        let card = resp;
-        console.log(card);
-        res.send(card);
-    })
-});
-
-
-/* GET users listing. */
-router.get('/hero', function(req, res, next) {
-    res.send('respond with a 1213');
-});
 
 module.exports = router;
