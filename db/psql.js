@@ -14,7 +14,7 @@ class PSQL_REPOSITORY {
 
     constructor(){
         const connectionString =
-            "postgres://postgres:p2ipZIpz5qkAbmAAo9w0@fmdb-postgresql.c6h95l1mgmuy.us-east-1.rds.amazonaws.com:5432/fmdb_dump";
+            "postgres://postgres:zK33jePGhSbLcTgsanJZ@fmdb-postgres.cqhoabkeawgx.us-east-1.rds.amazonaws.com:5432/fmdb_dump";
             // process.env.DATABASE_URL;
             // "postgres://postgres:p2ipZIpz5qkAbmAAo9w0@fmdb-postgresql.c6h95l1mgmuy.us-east-1.rds.amazonaws.com:5432/fmdb_dump";
         this.db = new Pool({

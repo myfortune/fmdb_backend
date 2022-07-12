@@ -55,6 +55,7 @@ app.use('/testAPI', testRouter);
 let port = process.env.PORT || CONFIG.port || DEFAULT_PORT;
 server.listen(port, function(){
     console.log(process.env.DATABASE_URL)
+    console.log(express().get("env"))
     console.log(`Listening on port ${port}`)
 });
 
