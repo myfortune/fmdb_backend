@@ -41,7 +41,7 @@ class PSQL_REPOSITORY {
 
     getTopPlayers(){
         let psql_query = `SELECT * 
-            FROM "combinedMax"
+            FROM all_combined_max
             WHERE program != 'BASEITEM' AND 
                 "cardId" in (21503589, 21503604, 21502852, 21503126, 21502932,21502271,
         21503286, 21503461, 21502188, 21501668,21503327,21503613)`
@@ -51,7 +51,7 @@ class PSQL_REPOSITORY {
     }
 
     getTierList(){
-        let psql_query = `SELECT * FROM "combinedMax"`
+        let psql_query = `SELECT * FROM all_combined_max`
         return query(this.db, psql_query);
 
     }
