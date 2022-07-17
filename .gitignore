@@ -1,4 +1,4 @@
 node_modules
 .env
-public/etc
-public/static
+public/images/etc/*
+public/images/static/*
