@@ -56,7 +56,7 @@ let port = process.env.PORT || CONFIG.port || DEFAULT_PORT;
 server.listen(port, function(){
     console.log(process.env.DATA_URL)
     console.log(express().get("env"))
-    console.log("1000");
+    console.log("999");
     console.log(`Listening on port ${port}`)
 });
 
